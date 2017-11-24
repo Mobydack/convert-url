@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>uKit AI</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <script
+        src="http://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+        crossorigin="anonymous">
+    </script>
+    <script src="script/jquery.jrumble.1.3.min.js"></script>
+    <div class="UL">
+        <header class="ul-header">
+            <a href="http://ukit.com">
+                <img src="image\img-ukit-logo.png" alt=" " class="image-ukit-logo">
+                </img>
+            </a>
+            <a href="#" class="ul-info">О проекте uKit AI</a>
+        </header>
+        <div class="ul-container">
+            <img src="image/img-ukit-ai-logo.svg"class="image-ukit-ai-logo">
+            </img>
+            <p class="ul-ai-text">Копирование сайта в&nbsp;ukit</p>
+            <div class="ul-uploader">
+                <form id="uploaderData"action="">
+                    <input type="text" name="uploaderURL" class="ul-fs" placeholder="Вставьте ссылку" required autocomplete="off"
+                    pattern="(^https?:\/\/)?[a-zА-Яа-яёЁ0-9~_\-\.]+\.[a-zа-яА-ЯёЁ]{2,9}(\/|:|\?[!-~]*)?$"
+                    >
+                </form>
+                <button class="ul-button" form="uploaderData"><div class="loader"></div>Создать сайт <span class="ul-button-icon">&rarr;</span></button>
+            </div>
+        </div>
+        <footer class="ul-footer">
+            <p class="ul-footer-text">Усли возникли проблемы или есть предложения</p>
+            <input type="button" value="Обратная связь" class="ul-footer-button" onclick="feedbackClick(event)">
+        </footer>
+    </div>
+    <div class="ul-feedback-wrapper">
+        <div class="feedback-button-close" onclick="feedbackClose(event)"></div>
+        <iframe src="https://uteam.typeform.com/to/ntr8rP" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+    <script>
+        (function(){
+            $('input[name="uploaderURL"]').jrumble({
+                    x: 2,
+	                y: 0,
+                    rotation: 0,
+                    speed: 10
+                });
+            $('.ul-button').on('click', function(){
+                if(!$('input[name="uploaderURL"]')[0].validity.valid){
+                    $('input[name="uploaderURL"]').trigger('startRumble')
+                    setTimeout(function(){
+                        $('input[name="uploaderURL"]').trigger('stopRumble')
+                    }, 400)
+                }
+                else {
+                   
+                }
+            });
+            // $('input[name="uploaderURL"]').on('input', function(event){
+            //     if(!event.target.validity.valid) {
+            //     }
+            // });
+            // var but = document.querySelector("ul-button");
+
+            // alert(uploaderURL)
+        })();
+        function feedbackClick(event) {
+            var feedbackWrapper = document.querySelector(".ul-feedback-wrapper");
+            feedbackWrapper.style.height = "100%";
+        }
+        function feedbackClose(event){
+            event.target.parentElement.style.height = "0";
+        }
+
+    </script>
+</body>
+</html>
