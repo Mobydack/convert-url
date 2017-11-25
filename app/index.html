@@ -26,18 +26,17 @@
             <img src="image/img-ukit-ai-logo.svg"class="image-ukit-ai-logo">
             </img>
             <p class="ul-ai-text">Копирование сайта в&nbsp;ukit</p>
-            <div class="ul-uploader">
-                <form id="uploaderData"action="">
-                    <input type="text" name="uploaderURL" class="ul-fs" placeholder="Вставьте ссылку" required autocomplete="off"
-                    pattern="(^https?:\/\/)?[a-zА-Яа-яёЁ0-9~_\-\.]+\.[a-zа-яА-ЯёЁ]{2,9}(\/|:|\?[!-~]*)?$"
-                    >
-                </form>
-                <button class="ul-button" form="uploaderData"><div class="loader"></div>Создать сайт <span class="ul-button-icon">&rarr;</span></button>
+            <div class="ul-uploader" data-state="url-paste">
+                <input type="text" name="uploaderURL" data-state="" class="ul-fs js-input-upload" placeholder="Вставьте ссылку" required autocomplete="off"
+                pattern="(^https?:\/\/)?[a-zА-Яа-яёЁ0-9~_\-\.]+\.[a-zа-яА-ЯёЁ]{2,9}(\/|:|\?[!-~]*)?$"
+                autofocus
+                >
+                <button class="ul-button" type="button">Создать сайт <span class="ul-button-icon">&rarr;</span></button>
             </div>
         </div>
         <footer class="ul-footer">
             <p class="ul-footer-text">Усли возникли проблемы или есть предложения</p>
-            <input type="button" value="Обратная связь" class="ul-footer-button" onclick="feedbackClick(event)">
+            <input type="button" value="Обратная связь" class="ul-footer-button">
         </footer>
     </div>
     <div class="ul-feedback-wrapper">
@@ -51,7 +50,7 @@
 	                y: 0,
                     rotation: 0,
                     speed: 10
-                });
+            });
             $('.ul-button').on('click', function(){
                 if(!$('input[name="uploaderURL"]')[0].validity.valid){
                     $('input[name="uploaderURL"]').trigger('startRumble')
@@ -59,26 +58,107 @@
                         $('input[name="uploaderURL"]').trigger('stopRumble')
                     }, 400)
                 }
-                else {
-                   
+                else if($('input[name="uploaderURL"]')[0].validity.valid) {
+                    startConvert();
                 }
             });
-            // $('input[name="uploaderURL"]').on('input', function(event){
-            //     if(!event.target.validity.valid) {
-            //     }
-            // });
-            // var but = document.querySelector("ul-button");
+            $('.ul-fs').keydown( function(event){
+                if( event.which == 13){
+                    if(!$('input[name="uploaderURL"]')[0].validity.valid){
+                        $('input[name="uploaderURL"]').trigger('startRumble')
+                        setTimeout(function(){
+                            $('input[name="uploaderURL"]').trigger('stopRumble')
+                        }, 400)
+                    }
+                    else if($('input[name="uploaderURL"]')[0].validity.valid) {
+                        startConvert();
+                    }
+                }
 
-            // alert(uploaderURL)
+            });
+            $('.ul-footer-button').on('click', function(){
+                $('.ul-feedback-wrapper').height('100%');
+            });
+            $('.feedback-button-close').on('click', function(){
+                $('.ul-feedback-wrapper').height("0");
+            });
         })();
-        function feedbackClick(event) {
-            var feedbackWrapper = document.querySelector(".ul-feedback-wrapper");
-            feedbackWrapper.style.height = "100%";
-        }
-        function feedbackClose(event){
-            event.target.parentElement.style.height = "0";
-        }
+        function convert(opts) {
+            $.ajax({
+                url: '/atg/convertUrl',
+                method: 'POST',
+                contentType : 'application/json',
+                data: JSON.stringify({
+                    url    : opts.url
+                })
+            }).then(function (data) {
+                if (data && data.atgConvertId) {
+                    waitForConvert(data.atgConvertId);
+                } else {
+                    $('.ul-uploader--url').attr('data-state', 'error');
+                    $('.loader').css('display', 'none');
+                    alert("Ошибка конвертации");
+                    // $('.ul-uploader-text').text('Ошибка при конвертации!');
+                }
+            }).catch( function() {
+                $('.ul-uploader--url').attr('data-state', 'error');
+                alert("Ошибка конвертации")
+                // $('.ul-uploader-text').text('Ошибка при конвертации!');
+            });
+	    }
+        function startConvert () {
+            $('.ul-uploader').attr('data-state', 'loading');
+            $('.ul-button').html("<div class='loader'></div> Обработка");
+            // $('.ul-button-text').text("Обработка");
+            // $('.loader').css('display', 'inline-block');
+            $('.ul-fs').prop({
+                'disabled': true
+            });
+            $('.ul-button').prop({
+                'disabled': true
+            });
 
+            convert({
+                url: $('.js-input-upload').val()
+            });
+	    };
+        function waitForConvert (atgConvertId) {
+            $.ajax({
+                url: '/atg/convertUrlCheck',
+                method: 'POST',
+                data: {
+                    atgConvertId,
+                }
+            }).then(function (data) {
+                if (data) {
+                    if (data.status == 'error') {
+                        $('.ul-uploader').attr('data-state', 'error');
+                        alert("Ошибка при конвертации")
+                        // $(document).one('click', '.ul-uploader-drop', function () {
+                        //     window.location.reload();
+                        // });
+                        return;
+                    } else if (data.status == 'ready') {
+                        $('.ul-uploader').attr('data-state', 'success');
+                        alert('Сайт сконвертирован! Нажмите, чтобы сконвертировать другой сайт.');
+                        window.open(data.url);
+                        // $(document).one('click', '.ul-uploader-drop', function () {
+                        //     window.location.reload();
+                        // });
+                    } else if (data.status == 'convert') {
+                        setTimeout(function () {
+                            waitForConvert(atgConvertId);
+                        }, 5000);
+                    }
+                }
+            }).catch( function() {
+                $('.ul-uploader').attr('data-state', 'error');
+                alert('Ошибка при конвертации!');
+                // $(document).one('click', '.ul-uploader-drop', function() {
+                //     window.location.reload();
+                // });
+            });
+	    }
     </script>
 </body>
 </html>
