@@ -46,7 +46,7 @@ body {
 .UL {
     display: flex;
     flex-direction: column;
-    min-height: 1024px;
+    min-height: 100vh;
     height: 100%;
 }
 .ul-header {
@@ -117,7 +117,7 @@ body {
             background-color: #aa33ff;
             border-radius: 4px;
             padding: 9px 24px;
-            transition: .6s ease-in-out;
+            transition: .2s ease-in-out;
             &:hover {
                 cursor: pointer;
                 background-color: #c74cff;
@@ -187,7 +187,7 @@ body {
         color: #fff;
         background-color: #455462;
         font: 14px/1.29 AvenirNextCyr-Demi;
-        transition: .6s ease-in-out;
+        transition: .2s ease-in-out;
         &:hover {
             cursor: pointer;
             background-color:mix(#455462, #4994ff, 0.5)
@@ -213,7 +213,7 @@ body {
         border-radius: 50%;
         width: 40px;
         height: 40px;
-        transition: .4s ease-in-out;
+        transition: .3s ease-in-out;
         &:hover {
             cursor: pointer;
         }
@@ -221,7 +221,7 @@ body {
 }
 @media (max-width: 575px) {
     .ul-header {
-        flex-direction: column;
+        flex-direction: row;
         .ul-info {
             margin-top: 16px;
         }
@@ -237,7 +237,7 @@ body {
                 width: 100%;
             }
             .ul-button {
-                margin: 32px 0 0;
+                margin: 18px 0 0;
             }
         }
     }
