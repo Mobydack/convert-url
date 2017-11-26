@@ -219,6 +219,46 @@ body {
         }
     }
 }
+.ul-error-wrapper {
+    display: none;
+    z-index: 99999;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #131c22;
+    .ul-error {
+        text-align: center;
+        padding: 27px 25px 19px;
+        background-color: #263845;
+        min-width: 258px;
+        min-height: 188px;
+        border-radius: 6px;
+        .ul-error-header {
+            color: #c2445c;
+        }
+        .ul-error-text {
+            margin-top: 27px;
+            color: #a7b4c2;
+        }
+        .ul-error-button{
+            width: 156px;
+            height: 40px;
+            color: #132026;
+            border-radius: 6px;
+            margin-top: 20px;
+            background-color: #ffcc00;
+            transition: background-color .4s ease;
+            &:hover {
+                cursor: pointer;
+                background-color: #f8d75f;
+            }
+        }
+    }
+}
 @media (max-width: 575px) {
     .ul-header {
         flex-direction: row;
