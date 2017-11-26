@@ -281,4 +281,15 @@ body {
             }
         }
     }
+    .ul-error-wrapper {
+        .ul-error {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            align-self: stretch;
+            min-width: 100%;
+            border-radius: 0;
+        }
+    }
 }
