@@ -61,7 +61,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; }
+  justify-content: center;
+  padding-bottom: 48px; }
   .ul-container .image-ukit-ai-logo {
     width: 299px;
     height: 76px; }
@@ -93,12 +94,17 @@ body {
       background-color: #141921; }
       .ul-container .ul-uploader .ul-fs:focus {
         border-color: #aa33ff; }
+      .ul-container .ul-uploader .ul-fs::placeholder {
+        color: #7E8C9E; }
+      .ul-container .ul-uploader .ul-fs[disabled] {
+        cursor: not-allowed;
+        color: #7E8C9E; }
     .ul-container .ul-uploader .ul-button {
       display: flex;
       align-items: center;
       position: relative;
       margin-left: 18px;
-      width: 183px;
+      min-width: 183px;
       height: 42px;
       background-color: #aa33ff;
       border-radius: 4px;
@@ -108,35 +114,50 @@ body {
         cursor: pointer;
         background-color: #c74cff; }
       .ul-container .ul-uploader .ul-button[disabled] {
-        background-color: #aa33ff; }
+        background-color: #AA33FF; }
       .ul-container .ul-uploader .ul-button .loader {
         position: relative;
-        min-width: 20px;
-        min-height: 20px;
+        min-width: 18px;
+        min-height: 18px;
         margin-right: 8px;
         background-color: #aa33ff;
-        border-radius: 50%; }
+        border-radius: 50%;
+        opacity: 1;
+        bottom: 1px; }
         .ul-container .ul-uploader .ul-button .loader:after {
           content: '';
           position: absolute;
-          border-radius: 50%;
-          top: 50%;
-          left: 50%;
-          border: 0px solid #03a9f4;
-          transform: translate(-50%, -50%);
-          animation: loading 1000ms ease-out forwards infinite; }
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.4);
+          border-radius: 50px;
+          opacity: 0;
+          transform: scale(1);
+          animation: loading 1.2s infinite linear; }
+        .ul-container .ul-uploader .ul-button .loader:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.4);
+          border-radius: 50px;
+          opacity: 0;
+          animation: loading 1.2s 0.6s infinite linear; }
 
 @keyframes loading {
   0% {
-    border: 0px solid #03a9f4; }
-  20% {
-    border: 2px solid #03a9f4;
-    width: 0%;
-    height: 0%; }
+    transform: scale(0.6);
+    opacity: 0; }
+  33% {
+    transform: scale(1);
+    opacity: 1; }
   100% {
-    border: 2px solid #03a9f4;
-    width: 100%;
-    height: 100%; } }
+    transform: scale(1.4);
+    opacity: 0; } }
 
 .ul-footer {
   display: flex;
@@ -155,19 +176,22 @@ body {
     height: 30px;
     border-radius: 6px;
     color: #fff;
-    background-color: #455462;
+    background-color: #3B4A57;
     font: 14px/1.29 AvenirNextCyr-Demi;
     transition: .2s ease-in-out; }
     .ul-footer .ul-footer-button:hover {
       cursor: pointer;
-      background-color: #4994fe; }
+      background-color: #435461; }
+    .ul-footer .ul-footer-button:active {
+      cursor: pointer;
+      background-color: #303C47; }
 
 .ul-feedback-wrapper {
-  background-color: #fff;
+  background-color: #3B4A57;
   position: absolute;
   width: 100%;
   height: 0;
-  transition: 1s ease;
+  transition: 0.3s ease;
   bottom: 0;
   overflow: hidden; }
   .ul-feedback-wrapper .feedback-button-close {
@@ -175,15 +199,17 @@ body {
     right: 48px;
     top: 48px;
     background-image: url(../image/img-modal-cross.svg);
-    background-size: 12px;
+    background-size: 24px;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    transition: .3s ease-in-out; }
+    opacity: 0.8;
+    transition: .1s ease-in-out; }
     .ul-feedback-wrapper .feedback-button-close:hover {
-      cursor: pointer; }
+      cursor: pointer;
+      opacity: 1; }
 
 .ul-error-wrapper {
   display: none;
@@ -195,38 +221,43 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #131c22; }
+  background-color: rgba(19, 25, 33, 0.6); }
   .ul-error-wrapper .ul-error {
     text-align: center;
-    padding: 27px 25px 19px;
+    padding-bottom: 48px;
+    padding-top: 32px;
+    padding-right: 32px;
+    padding-left: 32px;
     background-color: #263845;
     min-width: 258px;
     min-height: 188px;
     border-radius: 6px; }
     .ul-error-wrapper .ul-error .ul-error-header {
-      color: #c2445c; }
+      font-size: 21px;
+      font-weight: bold;
+      color: #FF4D94; }
     .ul-error-wrapper .ul-error .ul-error-text {
-      margin-top: 27px;
-      color: #a7b4c2; }
+      margin-top: 12px;
+      color: #A7B4C2;
+      font-weight: normal; }
     .ul-error-wrapper .ul-error .ul-error-button {
-      width: 156px;
-      height: 40px;
-      color: #132026;
+      color: #303C47;
+      padding: 8px 20px;
       border-radius: 6px;
       margin-top: 20px;
-      background-color: #ffcc00;
-      transition: background-color .4s ease; }
+      background-color: #F0DD30;
+      transition: background-color .2s ease-in-out; }
       .ul-error-wrapper .ul-error .ul-error-button:hover {
         cursor: pointer;
-        background-color: #f8d75f; }
+        background-color: #FAF44D; }
 
 @media (max-width: 575px) {
   .ul-header {
     flex-direction: row; }
-    .ul-header .ul-info {
-      margin-top: 16px; }
   .ul-container {
-    padding: 0 16px; }
+    padding-bottom: 36px;
+    padding-left: 24px;
+    padding-right: 24px; }
     .ul-container .ul-uploader {
       padding: 0 8px;
       width: 100%;
