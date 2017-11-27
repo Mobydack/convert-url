@@ -39,7 +39,7 @@ body {
 .UL {
   display: flex;
   flex-direction: column;
-  min-height: 1024px;
+  min-height: 100vh;
   height: 100%; }
 
 .ul-header {
@@ -94,6 +94,8 @@ body {
       .ul-container .ul-uploader .ul-fs:focus {
         border-color: #aa33ff; }
     .ul-container .ul-uploader .ul-button {
+      display: flex;
+      align-items: center;
       position: relative;
       margin-left: 18px;
       width: 183px;
@@ -101,22 +103,18 @@ body {
       background-color: #aa33ff;
       border-radius: 4px;
       padding: 9px 24px;
-      transition: .6s ease-in-out; }
+      transition: .2s ease-in-out; }
       .ul-container .ul-uploader .ul-button:hover {
         cursor: pointer;
         background-color: #c74cff; }
       .ul-container .ul-uploader .ul-button[disabled] {
-        background-color: #aa33ff;
-        background-image: linear-gradient(45deg, red 0%, red 25%, transparent 25%, transparent 50%, red 50%, red 75%, transparent 75%);
-        background-size: 30px 30px; }
+        background-color: #aa33ff; }
       .ul-container .ul-uploader .ul-button .loader {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        transform: translate(-50%, -50%);
-        width: 20px;
-        height: 20px;
-        background-color: #03a9f4;
+        position: relative;
+        min-width: 20px;
+        min-height: 20px;
+        margin-right: 8px;
+        background-color: #aa33ff;
         border-radius: 50%; }
         .ul-container .ul-uploader .ul-button .loader:after {
           content: '';
@@ -124,19 +122,19 @@ body {
           border-radius: 50%;
           top: 50%;
           left: 50%;
-          border: 0px solid #aa33ff;
+          border: 0px solid #03a9f4;
           transform: translate(-50%, -50%);
           animation: loading 1000ms ease-out forwards infinite; }
 
 @keyframes loading {
   0% {
-    border: 0px solid #aa33ff; }
+    border: 0px solid #03a9f4; }
   20% {
-    border: 8px solid #aa33ff;
+    border: 2px solid #03a9f4;
     width: 0%;
     height: 0%; }
   100% {
-    border: 8px solid #aa33ff;
+    border: 2px solid #03a9f4;
     width: 100%;
     height: 100%; } }
 
@@ -159,7 +157,7 @@ body {
     color: #fff;
     background-color: #455462;
     font: 14px/1.29 AvenirNextCyr-Demi;
-    transition: .6s ease-in-out; }
+    transition: .2s ease-in-out; }
     .ul-footer .ul-footer-button:hover {
       cursor: pointer;
       background-color: #4994fe; }
@@ -183,13 +181,48 @@ body {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    transition: .4s ease-in-out; }
+    transition: .3s ease-in-out; }
     .ul-feedback-wrapper .feedback-button-close:hover {
       cursor: pointer; }
 
+.ul-error-wrapper {
+  display: none;
+  z-index: 99999;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #131c22; }
+  .ul-error-wrapper .ul-error {
+    text-align: center;
+    padding: 27px 25px 19px;
+    background-color: #263845;
+    min-width: 258px;
+    min-height: 188px;
+    border-radius: 6px; }
+    .ul-error-wrapper .ul-error .ul-error-header {
+      color: #c2445c; }
+    .ul-error-wrapper .ul-error .ul-error-text {
+      margin-top: 27px;
+      color: #a7b4c2; }
+    .ul-error-wrapper .ul-error .ul-error-button {
+      width: 156px;
+      height: 40px;
+      color: #132026;
+      border-radius: 6px;
+      margin-top: 20px;
+      background-color: #ffcc00;
+      transition: background-color .4s ease; }
+      .ul-error-wrapper .ul-error .ul-error-button:hover {
+        cursor: pointer;
+        background-color: #f8d75f; }
+
 @media (max-width: 575px) {
   .ul-header {
-    flex-direction: column; }
+    flex-direction: row; }
     .ul-header .ul-info {
       margin-top: 16px; }
   .ul-container {
@@ -202,4 +235,12 @@ body {
         max-width: 360px;
         width: 100%; }
       .ul-container .ul-uploader .ul-button {
-        margin: 32px 0 0; } }
+        margin: 18px 0 0; }
+  .ul-error-wrapper .ul-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch;
+    min-width: 100%;
+    border-radius: 0; } }
