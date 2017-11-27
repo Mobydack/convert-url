@@ -20,7 +20,7 @@
                 <img src="image\img-ukit-logo.png" alt=" " class="image-ukit-logo">
                 </img>
             </a>
-            <a href="#" class="ul-info">О проекте uKit AI</a>
+            <a href="https://ukit.ai/ru/about" class="ul-info">О проекте uKit AI</a>
         </header>
         <div class="ul-container">
             <img src="image/img-ukit-ai-logo.svg"class="image-ukit-ai-logo">
@@ -31,11 +31,11 @@
                 pattern="(^https?:\/\/)?[a-zА-Яа-яёЁ0-9~_\-\.]+\.[a-zа-яА-ЯёЁ]{2,9}(\/|:|\?[!-~]*)?$"
                 autofocus
                 >
-                <button class="ul-button" type="button">Создать сайт <span class="ul-button-icon">&rarr;</span></button>
+                <button class="ul-button" type="button">Создать сайт <span class="ul-button-icon">&nbsp;&rarr;</span></button>
             </div>
         </div>
         <footer class="ul-footer">
-            <p class="ul-footer-text">Усли возникли проблемы или есть предложения</p>
+            <p class="ul-footer-text">Если возникли проблемы или есть предложения</p>
             <input type="button" value="Обратная связь" class="ul-footer-button">
         </footer>
     </div>
@@ -44,9 +44,9 @@
     </div>
     <div class="ul-error-wrapper">
         <div class="ul-error">
-            <h2 class="ul-error-header">Fatall error</h2>
-            <p class="ul-error-text">Request failed width status code 404</p>
-            <input type="button" class="ul-error-button" value="Работаем дальше">
+            <h2 class="ul-error-header">Ошибка</h2>
+            <p class="ul-error-text">При копировании возникла внутренняя ошибка</p>
+            <input type="button" class="ul-error-button" value="Выбрать другой сайт">
         </div>
     </div>
     <script>
@@ -84,7 +84,6 @@
             });
             $('.ul-footer-button').on('click', function(){
                 $('.ul-feedback-wrapper').height('100%');
-                console.log($('.ul-feedback-wrapper').data("vis"))
                 if(!$('.ul-feedback-wrapper').data("vis")) {
                     $('.ul-feedback-wrapper').append('<iframe src="https://uteam.typeform.com/to/ntr8rP" frameborder="0" width="100%" height="100%"></iframe>')
                     $('.ul-feedback-wrapper').data("vis", "true");
@@ -111,20 +110,15 @@
                 } else {
                     $('.ul-uploader--url').attr('data-state', 'error');
                     $('.loader').css('display', 'none');
-                    alert("Ошибка конвертации");
-                    // $('.ul-uploader-text').text('Ошибка при конвертации!');
                 }
             }).catch( function() {
                 $('.ul-uploader--url').attr('data-state', 'error');
-                alert("Ошибка конвертации")
-                // $('.ul-uploader-text').text('Ошибка при конвертации!');
+
             });
 	    }
         function startConvert () {
             $('.ul-uploader').attr('data-state', 'loading');
-            $('.ul-button').html("<div class='loader'></div> Обработка");
-            // $('.ul-button-text').text("Обработка");
-            // $('.loader').css('display', 'inline-block');
+            $('.ul-button').html("<div class='loader'></div> Обработка...");
             $('.ul-fs').prop({
                 'disabled': true
             });
@@ -148,17 +142,11 @@
                     if (data.status == 'error') {
                         $('.ul-uploader').attr('data-state', 'error');
                         $('.ul-error-wrapper').css('display', 'flex');
-                        // $(document).one('click', '.ul-uploader-drop', function () {
-                        //     window.location.reload();
-                        // });
+
                         return;
                     } else if (data.status == 'ready') {
                         $('.ul-uploader').attr('data-state', 'success');
-                        // alert('Сайт сконвертирован! Нажмите, чтобы сконвертировать другой сайт.');
                         window.open(data.url);
-                        // $(document).one('click', '.ul-uploader-drop', function () {
-                        //     window.location.reload();
-                        // });
                     } else if (data.status == 'convert') {
                         setTimeout(function () {
                             waitForConvert(atgConvertId);
@@ -168,9 +156,6 @@
             }).catch( function() {
                 $('.ul-uploader').attr('data-state', 'error');
                 $('.ul-error-wrapper').css('display', 'flex');
-                // $(document).one('click', '.ul-uploader-drop', function() {
-                //     window.location.reload();
-                // });
             });
 	    }
     </script>
