@@ -106,6 +106,9 @@ body {
             &:focus {
                 border-color: #aa33ff;
             }
+            &::placeholder {
+                color: #7E8C9E;
+            };
         }
         .ul-button {
             display: flex;
@@ -185,12 +188,16 @@ body {
         height: 30px;
         border-radius: 6px;
         color: #fff;
-        background-color: #455462;
+        background-color: #3B4A57;
         font: 14px/1.29 AvenirNextCyr-Demi;
         transition: .2s ease-in-out;
         &:hover {
             cursor: pointer;
-            background-color:mix(#455462, #4994ff, 0.5)
+            background-color: #435461;
+        }
+        &:active {
+            cursor: pointer;
+            background-color: #303C47;
         }
     }
 }
