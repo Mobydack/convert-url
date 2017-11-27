@@ -39,7 +39,7 @@
             <input type="button" value="Обратная связь" class="ul-footer-button">
         </footer>
     </div>
-    <div class="ul-feedback-wrapper">
+    <div class="ul-feedback-wrapper" data-vis="false">
         <div class="feedback-button-close"></div>
     </div>
     <div class="ul-error-wrapper">
@@ -84,7 +84,11 @@
             });
             $('.ul-footer-button').on('click', function(){
                 $('.ul-feedback-wrapper').height('100%');
-                $('.ul-feedback-wrapper').append('<iframe src="https://uteam.typeform.com/to/ntr8rP" frameborder="0" width="100%" height="100%"></iframe>')
+                console.log($('.ul-feedback-wrapper').data("vis"))
+                if(!$('.ul-feedback-wrapper').data("vis")) {
+                    $('.ul-feedback-wrapper').append('<iframe src="https://uteam.typeform.com/to/ntr8rP" frameborder="0" width="100%" height="100%"></iframe>')
+                    $('.ul-feedback-wrapper').data("vis", "true");
+                }
             });
             $('.feedback-button-close').on('click', function(){
                 $('.ul-feedback-wrapper').height("0");
@@ -107,20 +111,16 @@
                 } else {
                     $('.ul-uploader--url').attr('data-state', 'error');
                     $('.loader').css('display', 'none');
-                    alert("Ошибка конвертации");
-                    // $('.ul-uploader-text').text('Ошибка при конвертации!');
                 }
             }).catch( function() {
                 $('.ul-uploader--url').attr('data-state', 'error');
-                alert("Ошибка конвертации")
-                // $('.ul-uploader-text').text('Ошибка при конвертации!');
+
             });
 	    }
         function startConvert () {
             $('.ul-uploader').attr('data-state', 'loading');
             $('.ul-button').html("<div class='loader'></div> Обработка");
-            // $('.ul-button-text').text("Обработка");
-            // $('.loader').css('display', 'inline-block');
+
             $('.ul-fs').prop({
                 'disabled': true
             });
@@ -144,17 +144,11 @@
                     if (data.status == 'error') {
                         $('.ul-uploader').attr('data-state', 'error');
                         $('.ul-error-wrapper').css('display', 'flex');
-                        // $(document).one('click', '.ul-uploader-drop', function () {
-                        //     window.location.reload();
-                        // });
+
                         return;
                     } else if (data.status == 'ready') {
                         $('.ul-uploader').attr('data-state', 'success');
-                        // alert('Сайт сконвертирован! Нажмите, чтобы сконвертировать другой сайт.');
                         window.open(data.url);
-                        // $(document).one('click', '.ul-uploader-drop', function () {
-                        //     window.location.reload();
-                        // });
                     } else if (data.status == 'convert') {
                         setTimeout(function () {
                             waitForConvert(atgConvertId);
@@ -164,9 +158,6 @@
             }).catch( function() {
                 $('.ul-uploader').attr('data-state', 'error');
                 $('.ul-error-wrapper').css('display', 'flex');
-                // $(document).one('click', '.ul-uploader-drop', function() {
-                //     window.location.reload();
-                // });
             });
 	    }
     </script>
