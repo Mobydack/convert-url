@@ -14,6 +14,7 @@
 
 /*clearStyle*/
 *, *:after, *:before {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
   padding: 0; }
@@ -37,14 +38,25 @@ body {
   color: #fcfcfc; }
 
 .UL {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   min-height: 100vh;
   height: 100%; }
 
 .ul-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   padding: 36px 64px 48px; }
   .ul-header .image-ukit-logo {
@@ -56,12 +68,25 @@ body {
     line-height: 1.33; }
 
 .ul-container {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
   flex: 1;
+  -ms-flex-preferred-size: 100%;
   flex-basis: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
-  justify-content: center; }
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-bottom: 48px; }
   .ul-container .image-ukit-ai-logo {
     width: 299px;
     height: 76px; }
@@ -77,8 +102,14 @@ body {
     -webkit-user-select: none;
     color: #d3dce3; }
   .ul-container .ul-uploader {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     margin-top: 25px;
     font-size: 18px;
@@ -93,54 +124,109 @@ body {
       background-color: #141921; }
       .ul-container .ul-uploader .ul-fs:focus {
         border-color: #aa33ff; }
+      .ul-container .ul-uploader .ul-fs::-webkit-input-placeholder {
+        color: #7E8C9E; }
+      .ul-container .ul-uploader .ul-fs:-ms-input-placeholder {
+        color: #7E8C9E; }
+      .ul-container .ul-uploader .ul-fs::placeholder {
+        color: #7E8C9E; }
     .ul-container .ul-uploader .ul-button {
+      display: -webkit-box;
+      display: -ms-flexbox;
       display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
       align-items: center;
       position: relative;
       margin-left: 18px;
-      width: 183px;
+      min-width: 183px;
       height: 42px;
       background-color: #aa33ff;
       border-radius: 4px;
       padding: 9px 24px;
+      -webkit-transition: .2s ease-in-out;
+      -o-transition: .2s ease-in-out;
       transition: .2s ease-in-out; }
       .ul-container .ul-uploader .ul-button:hover {
         cursor: pointer;
         background-color: #c74cff; }
       .ul-container .ul-uploader .ul-button[disabled] {
-        background-color: #aa33ff; }
+        background-color: #AA33FF; }
       .ul-container .ul-uploader .ul-button .loader {
         position: relative;
-        min-width: 20px;
-        min-height: 20px;
+        min-width: 18px;
+        min-height: 18px;
         margin-right: 8px;
         background-color: #aa33ff;
-        border-radius: 50%; }
+        border-radius: 50%;
+        opacity: 1;
+        bottom: 1px; }
         .ul-container .ul-uploader .ul-button .loader:after {
           content: '';
           position: absolute;
-          border-radius: 50%;
-          top: 50%;
-          left: 50%;
-          border: 0px solid #03a9f4;
-          transform: translate(-50%, -50%);
-          animation: loading 1000ms ease-out forwards infinite; }
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.4);
+          border-radius: 50px;
+          opacity: 0;
+          -webkit-transform: scale(1);
+          -ms-transform: scale(1);
+          transform: scale(1);
+          -webkit-animation: loading 1.2s infinite linear;
+          animation: loading 1.2s infinite linear; }
+        .ul-container .ul-uploader .ul-button .loader:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(255, 255, 255, 0.4);
+          border-radius: 50px;
+          opacity: 0;
+          -webkit-animation: loading 1.2s 0.6s infinite linear;
+          animation: loading 1.2s 0.6s infinite linear; }
+
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 0; }
+  33% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1; }
+  100% {
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+    opacity: 0; } }
 
 @keyframes loading {
   0% {
-    border: 0px solid #03a9f4; }
-  20% {
-    border: 2px solid #03a9f4;
-    width: 0%;
-    height: 0%; }
+    -webkit-transform: scale(0.6);
+    transform: scale(0.6);
+    opacity: 0; }
+  33% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1; }
   100% {
-    border: 2px solid #03a9f4;
-    width: 100%;
-    height: 100%; } }
+    -webkit-transform: scale(1.4);
+    transform: scale(1.4);
+    opacity: 0; } }
 
 .ul-footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   margin-bottom: 98px; }
   .ul-footer .ul-footer-text {
@@ -155,18 +241,25 @@ body {
     height: 30px;
     border-radius: 6px;
     color: #fff;
-    background-color: #455462;
+    background-color: #3B4A57;
     font: 14px/1.29 AvenirNextCyr-Demi;
+    -webkit-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
     transition: .2s ease-in-out; }
     .ul-footer .ul-footer-button:hover {
       cursor: pointer;
-      background-color: #4994fe; }
+      background-color: #435461; }
+    .ul-footer .ul-footer-button:active {
+      cursor: pointer;
+      background-color: #303C47; }
 
 .ul-feedback-wrapper {
   background-color: #fff;
   position: absolute;
   width: 100%;
   height: 0;
+  -webkit-transition: 1s ease;
+  -o-transition: 1s ease;
   transition: 1s ease;
   bottom: 0;
   overflow: hidden; }
@@ -181,6 +274,8 @@ body {
     border-radius: 50%;
     width: 40px;
     height: 40px;
+    -webkit-transition: .3s ease-in-out;
+    -o-transition: .3s ease-in-out;
     transition: .3s ease-in-out; }
     .ul-feedback-wrapper .feedback-button-close:hover {
       cursor: pointer; }
@@ -188,48 +283,66 @@ body {
 .ul-error-wrapper {
   display: none;
   z-index: 99999;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #131c22; }
+  background-color: rgba(19, 25, 33, 0.6); }
   .ul-error-wrapper .ul-error {
     text-align: center;
-    padding: 27px 25px 19px;
+    padding-bottom: 48px;
+    padding-top: 32px;
+    padding-right: 32px;
+    padding-left: 32px;
     background-color: #263845;
     min-width: 258px;
     min-height: 188px;
     border-radius: 6px; }
     .ul-error-wrapper .ul-error .ul-error-header {
-      color: #c2445c; }
+      font-size: 21px;
+      font-weight: bold;
+      color: #FF4D94; }
     .ul-error-wrapper .ul-error .ul-error-text {
-      margin-top: 27px;
-      color: #a7b4c2; }
+      margin-top: 12px;
+      color: #A7B4C2;
+      font-weight: normal; }
     .ul-error-wrapper .ul-error .ul-error-button {
-      width: 156px;
-      height: 40px;
-      color: #132026;
+      height: 24px;
+      color: #303C47;
+      padding: 6px 20px;
       border-radius: 6px;
       margin-top: 20px;
-      background-color: #ffcc00;
-      transition: background-color .4s ease; }
+      background-color: #F0DD30;
+      -webkit-transition: background-color .2s ease-in-out;
+      -o-transition: background-color .2s ease-in-out;
+      transition: background-color .2s ease-in-out; }
       .ul-error-wrapper .ul-error .ul-error-button:hover {
         cursor: pointer;
-        background-color: #f8d75f; }
+        background-color: #FAF44D; }
 
 @media (max-width: 575px) {
   .ul-header {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row; }
-    .ul-header .ul-info {
-      margin-top: 16px; }
   .ul-container {
-    padding: 0 16px; }
+    padding-bottom: 36px;
+    padding-left: 24px;
+    padding-right: 24px; }
     .ul-container .ul-uploader {
       padding: 0 8px;
       width: 100%;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
       flex-direction: column; }
       .ul-container .ul-uploader .ul-fs {
         max-width: 360px;
@@ -237,10 +350,20 @@ body {
       .ul-container .ul-uploader .ul-button {
         margin: 18px 0 0; }
   .ul-error-wrapper .ul-error {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-item-align: stretch;
     align-self: stretch;
     min-width: 100%;
     border-radius: 0; } }

@@ -72,6 +72,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-bottom: 48px;
     .image-ukit-ai-logo{
         width: 299px;
         height: 76px;
@@ -106,13 +107,16 @@ body {
             &:focus {
                 border-color: #aa33ff;
             }
+            &::placeholder {
+                color: #7E8C9E;
+            };
         }
         .ul-button {
             display: flex;
             align-items: center;
             position: relative;
             margin-left: 18px;
-            width: 183px;
+            min-width: 183px;
             height: 42px;
             background-color: #aa33ff;
             border-radius: 4px;
@@ -123,45 +127,59 @@ body {
                 background-color: #c74cff;
             }
             &[disabled] {
-                background-color: #aa33ff;
+                background-color: #AA33FF;
             }
             .loader {
                 position: relative;
-                min-width: 20px;
-                min-height: 20px;
+                min-width: 18px;
+                min-height: 18px;
                 margin-right: 8px;
                 background-color: #aa33ff;
                 border-radius: 50%;
+                opacity: 1;
+                bottom: 1px;
                 
                 &:after {
                   content: '';
                   position: absolute;
-                  border-radius: 50%;
-                  top: 50%;
-                  left: 50%;
-                  border: 0px solid #03a9f4;
-                  transform: translate(-50%, -50%);
-                  animation: loading 1000ms ease-out forwards infinite;
-                }
-                
-              }
-              
-              @keyframes loading {
-                0% {
-                  border: 0px solid #03a9f4;
-                }
-                
-                20% {
-                  border: 2px solid #03a9f4;
-                  width: 0%;
-                  height: 0%;
-                }
-                
-                100% {
-                  border: 2px solid #03a9f4;
+                  top: 0;
+                  left: 0;
                   width: 100%;
                   height: 100%;
+                  background: rgba(white, 0.4);
+                  border-radius: 50px;
+                  opacity: 0;
+                  transform: scale(1);
+                  animation: loading 1.2s infinite linear;
                 }
+                
+                &:before {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background: rgba(white, 0.4);
+                  border-radius: 50px;
+                  opacity: 0;
+                  animation: loading 1.2s 0.6s infinite linear;
+                }
+
+              }
+            @keyframes loading {
+                  0% {
+                    transform: scale(0.6);
+                    opacity: 0;
+                  }
+                  33% {
+                    transform: scale(1);
+                    opacity: 1;
+                  }
+                  100% {
+                    transform: scale(1.4);
+                    opacity: 0;
+                  }
               }
         }
     }
@@ -185,12 +203,16 @@ body {
         height: 30px;
         border-radius: 6px;
         color: #fff;
-        background-color: #455462;
+        background-color: #3B4A57;
         font: 14px/1.29 AvenirNextCyr-Demi;
         transition: .2s ease-in-out;
         &:hover {
             cursor: pointer;
-            background-color:mix(#455462, #4994ff, 0.5)
+            background-color: #435461;
+        }
+        &:active {
+            cursor: pointer;
+            background-color: #303C47;
         }
     }
 }
@@ -229,32 +251,39 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #131c22;
+    background-color: rgba(19, 25, 33, 0.6);
     .ul-error {
         text-align: center;
-        padding: 27px 25px 19px;
+        padding-bottom: 48px;
+        padding-top: 32px;
+        padding-right: 32px;
+        padding-left: 32px;
         background-color: #263845;
         min-width: 258px;
         min-height: 188px;
         border-radius: 6px;
         .ul-error-header {
-            color: #c2445c;
+            font-size: 21px;
+            font-weight: bold;
+            color: #FF4D94;
         }
         .ul-error-text {
-            margin-top: 27px;
-            color: #a7b4c2;
+            margin-top: 12px;
+            color: #A7B4C2;
+            font-weight: normal;
+
         }
         .ul-error-button{
-            width: 156px;
-            height: 40px;
-            color: #132026;
+            height: 24px;
+            color: #303C47;
+            padding: 6px 20px;
             border-radius: 6px;
             margin-top: 20px;
-            background-color: #ffcc00;
-            transition: background-color .4s ease;
+            background-color: #F0DD30;
+            transition: background-color .2s ease-in-out;
             &:hover {
                 cursor: pointer;
-                background-color: #f8d75f;
+                background-color: #FAF44D;
             }
         }
     }
@@ -262,12 +291,11 @@ body {
 @media (max-width: 575px) {
     .ul-header {
         flex-direction: row;
-        .ul-info {
-            margin-top: 16px;
-        }
     }
     .ul-container {
-        padding: 0 16px;
+        padding-bottom: 36px;
+        padding-left: 24px;
+        padding-right: 24px;
         .ul-uploader {
             padding: 0 8px;
             width: 100%;
